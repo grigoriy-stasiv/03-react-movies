@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import type { Movie } from '../../types/movie';
 import css from './MovieModal.module.css';
 
@@ -31,7 +32,7 @@ export const MovieModal: React.FC<MovieModalProps> = ({ movie, onClose }) => {
     }
   };
 
-  return (
+  return createPortal(
     <div className={css.backdrop} role="dialog" aria-modal="true" onClick={handleBackdropClick}>
       <div className={css.modal}>
         <button className={css.closeButton} aria-label="Close modal" onClick={onClose}>
@@ -57,6 +58,7 @@ export const MovieModal: React.FC<MovieModalProps> = ({ movie, onClose }) => {
           </p>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body // Другий аргумент — куди саме монтувати вузол
   );
 };

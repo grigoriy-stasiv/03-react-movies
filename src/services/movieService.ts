@@ -1,12 +1,17 @@
 import axios from 'axios';
-import type { TMDBResponse } from '../types/movie';
+import type { Movie } from '../types/movie';
 
-const MY_TOKEN = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0ODM2MjU4NmRhMzNiNDNjOTM5ZGE2MTM4ZWQ0NWI1MSIsIm5iZiI6MTc4OTI4NTk4Mi43NjMsInN1YiI6IjZhYTY1NjVlMjJlMThlNWJkYTYwOWJmOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.WJsVdLsgoF_Pfq9cOtFW0WNBFpr8HZ4-dVX7TIoiczQ';
+export interface TMDBResponse {
+  results: Movie[];
+  page: number;
+  total_pages: number;
+  total_results: number;
+}
 
 const instance = axios.create({
   baseURL: 'https://api.themoviedb.org/3',
   headers: {
-    Authorization: `Bearer ${MY_TOKEN}`,
+    Authorization: 'Bearer ' + import.meta.env.VITE_TMDB_TOKEN,
   },
 });
 
